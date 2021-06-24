@@ -9,6 +9,7 @@ function App() {
   const [userClassChoice, setUserClassChoice] = useState([])
   const [races, setRaces] = useState([])
   const [userRaceChoice, setUserRaceChoice] = useState([])
+  const [recommendedStats, setRecommendedStats] = useState()
 
   useEffect(() => {
     axios({
@@ -29,25 +30,50 @@ function App() {
       setRaces(res.data.results)
     })
   }, []);
-    // as you add more dropdowns, add more arguments to this
 const generateSheet = (e, classChoice, raceChoice ) =>{
   e.preventDefault();
-  // const of userClassChoice and filter through classes and return classes.name === classChoice
-  // create new state for user class choice, setUserClassChoice with the filtered results
+
   const copyOfClassesData = [...classes];
   const copyOfRacesData = [...races];
+  // setUserClassChoice
   const filteredClassChoice = copyOfClassesData.filter((characterClass =>{
     return characterClass.name === classChoice
   }))
   setUserClassChoice(filteredClassChoice)
+  // set recommendedStats
+  if (filteredClassChoice[0].name == "Bard"){
+    setRecommendedStats("Recommended Abilities: Charisma & Dexterity")
+  } else if (filteredClassChoice[0].name == "Barbarian"){
+    setRecommendedStats("Recommended Abilities: Strength & Constitution")
+  }else if (filteredClassChoice[0].name == "Cleric"){
+    setRecommendedStats("Recommended Abilities: Wisdom & Constitution")
+  }else if (filteredClassChoice[0].name == "Druid"){
+    setRecommendedStats("Recommended Abilities: Wisdom & Dexterity or Constitution")
+  }else if (filteredClassChoice[0].name == "Fighter"){
+    setRecommendedStats("Recommended Abilities: Strength & Constitution")
+  }else if (filteredClassChoice[0].name == "Monk"){
+    setRecommendedStats("Recommended Abilities: Dexterity & Wisdom")
+  }else if (filteredClassChoice[0].name == "Paladin"){
+    setRecommendedStats("Recommended Abilities: Strength & Charisma")
+  }else if (filteredClassChoice[0].name == "Rogue"){
+    setRecommendedStats("Recommended Abilities: Dexterity & Wisdom")
+  }else if (filteredClassChoice[0].name == "Ranger"){
+    setRecommendedStats("Recommended Abilities: Dexterity & Wisdom")
+  }else if (filteredClassChoice[0].name == "Sorcerer"){
+    setRecommendedStats("Recommended Abilities: Charisma & Dexterity")
+  }else if (filteredClassChoice[0].name == "Warlock"){
+    setRecommendedStats("Recommended Abilities: Charisma & Dexterity")
+  }else if (filteredClassChoice[0].name == "Wizard"){
+    setRecommendedStats("Recommended Abilities: Intelligence & Dexterity")
+  }else if (filteredClassChoice[0].name == "Warlock"){
+    setRecommendedStats("Recommended Abilities: Charisma & Dexterity")
+  } else setRecommendedStats("null")
+  // setUserRaceChoice
   const filteredRaceChoice = copyOfRacesData.filter((characterRace =>{
     return characterRace.name === raceChoice
   }))
   setUserRaceChoice(filteredRaceChoice)
 }
-
-
-
   return (
     <div className="App">
       <header>
@@ -63,8 +89,9 @@ const generateSheet = (e, classChoice, raceChoice ) =>{
           generateSheet ={generateSheet}
           />
           <div className="results-div">
-            {userClassChoice!= false ? <h2>{userClassChoice[0].name}</h2> : <></>}
-            {userRaceChoice!= false ? <h2>{userRaceChoice[0].name}</h2> : <></>}
+            {userRaceChoice!= false ? <h2>Race: {userRaceChoice[0].name}</h2> : <></>}
+            {userClassChoice!= false ? <h2>Class: {userClassChoice[0].name}</h2> : <></>}
+            {/* {recommendedStats !== "" ? <h2>{recommendedStats}</h2> : <></>} */}
           </div>
         </div>
         </main>
