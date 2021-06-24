@@ -12,6 +12,7 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 
 html {
   background-color:slategray;
+  /* font-family:'Roboto', sans-serif; */
 }
 
 .wrapper{
@@ -27,6 +28,7 @@ h1{
   font-size:79px;
   color:white;
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  text-align: center;
 }
 
 h1 span{
@@ -111,3 +113,4 @@ footer{
   line-height:28px;
   letter-spacing:1px;
 }
+
