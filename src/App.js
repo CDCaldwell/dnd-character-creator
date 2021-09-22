@@ -9,7 +9,7 @@ function App() {
   const [userClassChoice, setUserClassChoice] = useState([])
   const [races, setRaces] = useState([])
   const [userRaceChoice, setUserRaceChoice] = useState([])
-  const [recommendedStats, setRecommendedStats] = useState()
+  const [recommendedStats, setRecommendedStats] = useState("")
 
   useEffect(() => {
     axios({
@@ -67,7 +67,8 @@ const generateSheet = (e, classChoice, raceChoice ) =>{
     setRecommendedStats("Recommended Abilities: Intelligence & Dexterity")
   }else if (filteredClassChoice[0].name == "Warlock"){
     setRecommendedStats("Recommended Abilities: Charisma & Dexterity")
-  } else setRecommendedStats("null")
+  } else setRecommendedStats(null)
+  
   // setUserRaceChoice
   const filteredRaceChoice = copyOfRacesData.filter((characterRace =>{
     return characterRace.name === raceChoice
@@ -89,9 +90,9 @@ const generateSheet = (e, classChoice, raceChoice ) =>{
           generateSheet ={generateSheet}
           />
           <div className="results-div">
-            {userRaceChoice!= false ? <h2>Race: {userRaceChoice[0].name}</h2> : <></>}
-            {userClassChoice!= false ? <h2>Class: {userClassChoice[0].name}</h2> : <></>}
-            {/* {recommendedStats !== "" ? <h2>{recommendedStats}</h2> : <></>} */}
+            {userRaceChoice!= false ? <h2>Race: {userRaceChoice[0].name}</h2> : null}
+            {userClassChoice!= false ? <h2>Class: {userClassChoice[0].name}</h2> : null}
+            {recommendedStats !== "" ? <h2>{recommendedStats}</h2> : null}
           </div>
         </div>
         </main>
@@ -105,3 +106,6 @@ const generateSheet = (e, classChoice, raceChoice ) =>{
 }
 
 export default App;
+// ADD ERROR HANDLING FOR IF USER ONLY PICKS ONE OPTION FROM DROPDOWN
+// Add an actual description of what the App is doing at the top of the page
+// group together like-terms in the big if statement

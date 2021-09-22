@@ -30,7 +30,7 @@ function UserForm(props){
                         {props.races.map((e) => {
                             return(
                                 <option value={e.name} key={e.index}>{`${e.name}`}</option>
-                            )
+                            )   
                         })}
                     </select>
                 </div>
