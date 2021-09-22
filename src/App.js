@@ -2,6 +2,7 @@ import './App.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import UserForm from './UserForm';
+import DropdownContainer from './components/DropdownContainer'
 
 function App() {
 
@@ -80,6 +81,7 @@ const generateSheet = (e, classChoice, raceChoice ) =>{
       <header>
         <div className="wrapper">
           <h1><span>D&D</span> Character Generator</h1>
+          <p className="description">Select from the dropdowns to start creating your character for D&D 5E!</p>
         </div>
       </header>
       <main>
@@ -93,6 +95,13 @@ const generateSheet = (e, classChoice, raceChoice ) =>{
             {userRaceChoice!= false ? <h2>Race: {userRaceChoice[0].name}</h2> : null}
             {userClassChoice!= false ? <h2>Class: {userClassChoice[0].name}</h2> : null}
             {recommendedStats !== "" ? <h2>{recommendedStats}</h2> : null}
+            {userRaceChoice!= false ? 
+            <div>
+              <DropdownContainer
+            userClass ={userClassChoice}
+            userRace ={userRaceChoice}
+            />
+            </div> : null}
           </div>
         </div>
         </main>
@@ -106,6 +115,20 @@ const generateSheet = (e, classChoice, raceChoice ) =>{
 }
 
 export default App;
-// ADD ERROR HANDLING FOR IF USER ONLY PICKS ONE OPTION FROM DROPDOWN
-// Add an actual description of what the App is doing at the top of the page
-// group together like-terms in the big if statement
+
+// Currently Working on:
+// Error handling (user only picks one of race/class)
+// Dropdown Container component (and statsCard and Basket) that appears when player has chosen race and class (drag and drop)
+  // Figure out how to only accept one drop in react-dnd
+  // Pull the dropped item into a new state to push out
+  // Add racial bonuses
+
+
+// What to add:
+// Remove recommended abilities
+// Add Background selector (dropdown)
+// Skills & proficiencies
+// Add spells (drag and drop?)
+// Feat selector
+// Alignment Selector
+// Firebase support
